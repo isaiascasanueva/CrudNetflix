@@ -41,18 +41,46 @@ public class PlanDao {
 			connection.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-				connection.rollback();
+			connection.rollback();
 			e.printStackTrace();
 		}
 		
 		
-		return true;
+		return estadoOperacion;
 	}
 
 	//editar
-	public boolean editar(Subscritor subs ) {
+	public boolean editar(Subscritor subs ) throws SQLException {
+		String sql= null;
+		estadoOperacion=false;
+		connection= obtenerConexion();
+		try {
+			connection.setAutoCommit(false);
+			sql="UPDATE usuario SET nombre=?, apellidoPaterno=?,apellidoMaterno=?,servicio=?, fechaNacimiento=?, plan=?, estatus=? WHERE id=?";
+			statement=connection.prepareStatement(sql);
+			
+			statement.setString(1, subs.getNombre());
+			statement.setString(2, subs.getApellidoPaterno());
+			statement.setString(3, subs.getApellidoMaterno());
+			statement.setString(4, subs.getServicio());
+			statement.setString(5, subs.getFechaNacimiento());
+			statement.setObject(6, subs.getPlan());
+			statement.setString(7, subs.getEstatus());
+			statement.setInt(8, subs.getId());
+			
+			estadoOperacion=statement.executeUpdate()>0;
+			connection.commit();
+			statement.close();
+			connection.close();
+			
+			
+			
+		} catch (SQLException e) {
+			connection.rollback();
+			e.printStackTrace();
+		}
 		
-		return true;
+		return estadoOperacion;
 	}
 
 	//eliminar
