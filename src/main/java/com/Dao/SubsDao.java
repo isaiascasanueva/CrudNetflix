@@ -10,9 +10,8 @@ import java.util.List;
 import com.conexion.conexion;
 import com.model.Plan;
 import com.model.Subscritor;
-import com.mysql.cj.xdevapi.PreparableStatement;
 
-public class PlanDao {
+ public class SubsDao {
 
 	private Connection connection;
 	private PreparedStatement statement;
@@ -113,7 +112,7 @@ public class PlanDao {
 	public List<Subscritor> obtenerSubs(int idSubs) throws SQLException {
 		ResultSet resulset = null;
 		List<Subscritor> listaUsuarios = new ArrayList<>();
-		Plan pl;
+		
 		String sql = null;
 		estadoOperacion = false;
 		connection = obtenerConexion();
@@ -124,7 +123,7 @@ public class PlanDao {
 			resulset = statement.executeQuery(sql);
 			
 			while (resulset.next()) {
-				 pl = new Plan();
+				
 				Subscritor s = new Subscritor();
 				s.setId(resulset.getInt(1));
 				s.setNombre(resulset.getString(2));
