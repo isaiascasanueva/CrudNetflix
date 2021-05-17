@@ -14,7 +14,7 @@
 	
 		
 			<tr>
-		<td>idPlan</td>
+		<td>idPlan:</td>
 		<td><input type="number" name="idPlan" size="50"> </input></td>
 		</tr>
 		
