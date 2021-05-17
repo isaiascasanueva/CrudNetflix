@@ -18,10 +18,11 @@ public class conexion {
 		
 		if(dataSource==null) {
 			dataSource = new BasicDataSource();
-			dataSource.setDriverClassName("com.mysql.jc.jdbc.Driver");
+			dataSource.setDriverClassName("com.mysql.jdbc.Driver");
 			dataSource.setUsername("root");
 			dataSource.setPassword("");
 			dataSource.setUrl("jdbc:mysql://localhost:3306/netflix1");
+			
 			dataSource.setInitialSize(20);
 			dataSource.setMaxIdle(15);
 			dataSource.setMaxTotal(20);

@@ -25,7 +25,7 @@ import com.model.Subscritor;
 
 		try {
 			connection.setAutoCommit(false);
-			sql = "INSERT INT usuario (id, nombre, apellidoPaterno,apellidoMaterno,servicio, fechaNacimiento, plan, estatus) VALUES(?,?,?,?,?,?,?,?) ";
+			sql = "INSERT INTO usuario (id, nombre, apellidoPaterno,apellidoMaterno,servicio, fechaNacimeinto, plan, estatus) VALUES(?,?,?,?,?,?,?,?) ";
 			statement = connection.prepareStatement(sql);
 
 			statement.setString(1, null);

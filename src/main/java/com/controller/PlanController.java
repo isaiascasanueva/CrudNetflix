@@ -10,21 +10,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.Dao.SubsDao;
+import com.Dao.PlanDao;
 import com.model.Plan;
-import com.model.Subscritor;
 
 /**
- * Servlet implementation class SubscritorController
+ * Servlet implementation class PlanController
  */
-@WebServlet(description = "administra peticiones para la tabla subs", urlPatterns = { "/Subscritor" })
-public class SubscritorController extends HttpServlet {
+@WebServlet("/PlanController")
+public class PlanController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SubscritorController() {
+    public PlanController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,14 +34,17 @@ public class SubscritorController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		String opcion = request.getParameter("opcion");
-		if(opcion.equals("crear")) {
-			//System.out.println("Usted quiere crear");
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("views/crear.jsp");
-			requestDispatcher.forward(request, response);
-		}else {
+	
 			if(opcion.equals("obtener")) {
 				RequestDispatcher requestDispatcher = request.getRequestDispatcher("views/PlanController.jsp");
 				requestDispatcher.forward(request, response);
+				
+		}else {
+			if(opcion.equals("crearPlan")){
+				
+				RequestDispatcher requestDispatcher = request.getRequestDispatcher("views/crearPlan.jsp");
+				requestDispatcher.forward(request, response);
+				
 				
 			}
 		}
@@ -52,29 +54,22 @@ public class SubscritorController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String opcion= request.getParameter("opcion");
+		String opcion= request.getParameter("opcion1");
 		Plan pl = new Plan();
+		PlanDao pld= new PlanDao();
 		
-		SubsDao subsDao = new SubsDao();
+		pl.setIdPlan(Integer.parseInt(request.getParameter("idPlan")));
+		pl.setNombre(request.getParameter("nombrePlan"));
+		pl.setImportef(Float.parseFloat(request.getParameter("costo")));
 		
-		Subscritor sub = new Subscritor();
-		
-		sub.setNombre(request.getParameter("nombre"));
-		sub.setApellidoPaterno(request.getParameter("apellidoPaterno"));
-		sub.setApellidoMaterno(request.getParameter("apellidoMaterno"));
-		sub.setServicio(request.getParameter("servicio"));
-		sub.setFechaNacimiento(request.getParameter("fechaNacimiento"));
-		//sub.setPlan();
-		sub.setEstatus(request.getParameter("estatus"));
 		
 		try {
-			subsDao.guardar(sub);
-			System.out.println("Se a guardado correctamente");
+			pld.guardar(pl);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}
 
 }

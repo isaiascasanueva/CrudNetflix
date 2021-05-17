@@ -42,7 +42,11 @@
 		
 		<tr>
 		<td>Plan:</td>
-		<td><input type="text" name="plan" size="50"> </input></td>
+		<td>
+			<input type="text" name="1" size="50" value="1"> </input>
+			<input type="text" name="Maximo" size="50" value="Maximo"> </input>
+			<input type="text" name="500" size="50" value="500"> </input>
+		</td>
 		</tr>
 		
 		<tr>
