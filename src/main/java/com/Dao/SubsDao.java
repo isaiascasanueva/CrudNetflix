@@ -50,6 +50,42 @@ import com.model.Subscritor;
 		return estadoOperacion;
 	}
 
+
+public Plan obtenerPlan(int idplan) throws SQLException {
+		
+		ResultSet resulset = null;
+		Plan pl = new Plan();
+		String sql = null;
+		estadoOperacion = false;
+		connection = obtenerConexion();
+
+		try {
+
+			sql = "SELECT * FROM plan WHERE idPlan=?";
+			statement = connection.prepareStatement(sql);
+			statement.setInt(1, idplan);
+			resulset = statement.executeQuery(sql);
+			
+			
+			if(resulset.next()) {
+		
+			pl.setIdPlan(resulset.getInt(1));
+			pl.setNombre(resulset.getString(2));
+			pl.setImportef(Float.parseFloat(resulset.getString(3)));
+				
+				
+			}
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+
+		return pl;
+	}
+
+	
+	
+	
 	// editar
 	public boolean editar(Subscritor subs) throws SQLException {
 		String sql = null;

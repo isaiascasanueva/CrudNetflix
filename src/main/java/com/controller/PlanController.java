@@ -2,6 +2,8 @@ package com.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -46,6 +48,27 @@ public class PlanController extends HttpServlet {
 				requestDispatcher.forward(request, response);
 				
 				
+			}else {
+				if(opcion.equals("listaPlan")) {
+					
+					PlanDao pladdado = new PlanDao();
+					List<Plan> lista= new ArrayList<>();
+					
+					try {
+						lista = pladdado.obtenerPlans();
+						for(Plan pl:lista) {
+							System.out.println(pl);
+						}
+						
+						request.setAttribute("lista", lista);
+						RequestDispatcher requestDispatcher = request.getRequestDispatcher("views/listasPlan.jsp");
+						requestDispatcher.forward(request, response);
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} 
+
+				}
 			}
 		}
 	}

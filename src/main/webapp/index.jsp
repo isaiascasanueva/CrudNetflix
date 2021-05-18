@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,6 +14,7 @@
 	<tr><td> <a href="Subscritor?opcion=listar">Lista de usuarios</a></td></tr>
 	<tr><td> <a href="PlanController?opcion=obtener">Obtener usuario</a></td></tr>
 	<tr><td> <a href="PlanController?opcion=crearPlan">CrearPlan</a></td></tr>
+	<tr><td> <a href="PlanController?opcion=listaPlan">Listar Plan</a></td></tr>
 	
 	</table>
 </body>

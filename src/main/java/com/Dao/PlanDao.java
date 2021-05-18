@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.conexion.conexion;
 import com.model.Plan;
@@ -49,6 +51,42 @@ public class PlanDao {
 	}
 	
 	
+	
+	// lista de subs
+		public List<Plan> obtenerPlans() throws SQLException {
+			ResultSet resulset = null;
+			List<Plan> listaUsuarios = new ArrayList<>();
+			
+			String sql = null;
+			estadoOperacion = false;
+			connection = obtenerConexion();
+
+			try {
+
+				sql = "SELECT * FROM plan";
+				statement=connection.prepareStatement(sql);
+				resulset = statement.executeQuery(sql);
+				
+				while (resulset.next()) {
+					
+					Plan p = new Plan();
+					p.setIdPlan(resulset.getInt(1));
+					p.setNombre(resulset.getString(2));
+					p.setImportef(resulset.getFloat(3));
+					
+					
+					
+					listaUsuarios.add(p);
+					
+					
+				}
+			} catch (SQLException e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+
+			return listaUsuarios;
+		}
 	
 
 public Plan obtenerPlan(int idplan) throws SQLException {
